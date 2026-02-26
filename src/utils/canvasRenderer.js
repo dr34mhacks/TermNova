@@ -343,12 +343,46 @@ export function generateAnimationFrames(parsedLines, config, theme, options = {}
     text: l.text,
     showPrompt: l.showPrompt,
   }));
-  const terminalDims = calculateCanvasDimensions(config, theme, finalLines, scale);
 
   // Determine canvas dimensions
   const useTargetDimensions = targetWidth && targetHeight;
-  const canvasWidth = useTargetDimensions ? targetWidth * scale : terminalDims.width;
-  const canvasHeight = useTargetDimensions ? targetHeight * scale : terminalDims.height;
+  const canvasWidth = useTargetDimensions ? targetWidth * scale : null;
+  const canvasHeight = useTargetDimensions ? targetHeight * scale : null;
+
+  // Auto-scale font if content doesn't fit in fixed dimensions
+  let adjustedConfig = { ...config };
+  if (useTargetDimensions) {
+    const terminalDims = calculateCanvasDimensions(config, theme, finalLines, scale);
+
+    // Calculate scale factors needed to fit
+    const widthRatio = canvasWidth / terminalDims.width;
+    const heightRatio = canvasHeight / terminalDims.height;
+    const fitRatio = Math.min(widthRatio, heightRatio);
+
+    // Only scale down, never up - and set minimum font size
+    if (fitRatio < 1) {
+      const minFontSize = 8;
+      const newFontSize = Math.max(minFontSize, Math.floor(config.fontSize * fitRatio));
+      const newPadding = Math.max(8, Math.floor(config.padding * fitRatio));
+
+      adjustedConfig = {
+        ...config,
+        fontSize: newFontSize,
+        padding: newPadding,
+      };
+    }
+  }
+
+  // Recalculate dimensions with adjusted config if no target dimensions
+  let finalCanvasWidth, finalCanvasHeight;
+  if (useTargetDimensions) {
+    finalCanvasWidth = canvasWidth;
+    finalCanvasHeight = canvasHeight;
+  } else {
+    const dims = calculateCanvasDimensions(adjustedConfig, theme, finalLines, scale);
+    finalCanvasWidth = dims.width;
+    finalCanvasHeight = dims.height;
+  }
 
   // Calculate typed chars, excluding instant lines (both from outputMode and !! markers)
   const typedChars = parsedLines.reduce((sum, l) => {
@@ -358,16 +392,16 @@ export function generateAnimationFrames(parsedLines, config, theme, options = {}
   }, 0);
   const charsPerFrame = Math.max(1, Math.ceil(typedChars / targetFrameCount));
 
-  // Helper to create a frame with consistent dimensions
+  // Helper to create a frame with consistent dimensions (using adjusted config for font scaling)
   const createFrame = (lines, cursorLineIndex, delay) => ({
-    canvas: createTerminalCanvas(config, theme, {
+    canvas: createTerminalCanvas(adjustedConfig, theme, {
       lines,
       showCursor: true,
       cursorLineIndex,
     }, {
       scale,
-      fixedWidth: canvasWidth,
-      fixedHeight: canvasHeight,
+      fixedWidth: finalCanvasWidth,
+      fixedHeight: finalCanvasHeight,
     }),
     delay,
   });

@@ -1,14 +1,12 @@
-# TermNova
-
 <div align="center">
+
+# `TermNova`
 
 **Turn boring terminal screenshots into eye-catching animated showcases**
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-green?style=for-the-badge)](https://dr34mhacks.github.io/TermNova/)
 [![GitHub Stars](https://img.shields.io/github/stars/dr34mhacks/TermNova?style=for-the-badge&color=yellow)](https://github.com/dr34mhacks/TermNova)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=for-the-badge)](LICENSE)
-
-![Demo](demo.gif)
 
 </div>
 
@@ -40,13 +38,22 @@ TermNova lets you create **beautiful, animated terminal GIFs** that look like th
 ## Screenshots
 
 <div align="center">
-
-| Theme | Preview |
-|:-----:|:-------:|
-| Matrix | ![Matrix Theme](screenshots/matrix.png) |
-| Dracula | ![Dracula Theme](screenshots/dracula.png) |
-| Nord | ![Nord Theme](screenshots/nord.png) |
-
+<table>
+<tr>
+<td align="center">
+<b>Gif</b><br>
+<img src="screenshots/demo.gif" width="300">
+</td>
+<td align="center">
+<b>Horizon</b><br>
+<img src="screenshots/demo.png" width="300">
+</td>
+<td align="center">
+<b>Mr Robot</b><br>
+<img src="screenshots/robot.png" width="300">
+</td>
+</tr>
+</table>
 </div>
 
 ---
@@ -75,26 +82,20 @@ npm install
 npm run dev
 ```
 
+or just use `https://dr34mhacks.github.io/TermNova/`
+
 ---
 
 ## Acknowledgments
 
-Built with [React](https://react.dev/), [Vite](https://vitejs.dev/), [Tailwind CSS](https://tailwindcss.com/), [gifenc](https://github.com/mattdesl/gifenc), [html2canvas](https://html2canvas.hertzen.com/), and [Lucide](https://lucide.dev/).
-
----
-
-## License
-
-Apache License 2.0 - free for personal and commercial use.
+Built with [gifenc](https://github.com/mattdesl/gifenc) and [html2canvas](https://html2canvas.hertzen.com/). 
 
 ---
 
 <div align="center">
 
-**Made with ☕ and mass mass mass by [@dr34mhacks](https://github.com/dr34mhacks)**
+**Made with lots of  ☕ by [@dr34mhacks](https://github.com/dr34mhacks)**
 
 *No terminals were harmed in the making of this tool.*
-
-*But several passwords were definitely `password123`.*
 
 </div>
