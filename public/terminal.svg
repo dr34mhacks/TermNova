@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect x="5" y="10" width="90" height="70" rx="5" fill="#1a1a2e" stroke="#00ff00" stroke-width="2"/>
+  <rect x="10" y="15" width="80" height="5" rx="2" fill="#16213e"/>
+  <circle cx="15" cy="17.5" r="2" fill="#ff5f56"/>
+  <circle cx="22" cy="17.5" r="2" fill="#ffbd2e"/>
+  <circle cx="29" cy="17.5" r="2" fill="#27c93f"/>
+  <text x="15" y="40" font-family="monospace" font-size="10" fill="#00ff00">$_</text>
+  <rect x="26" y="32" width="8" height="12" fill="#00ff00" opacity="0.8">
+    <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+  </rect>
+  <text x="15" y="55" font-family="monospace" font-size="8" fill="#00ff00" opacity="0.7">terminal</text>
+  <text x="15" y="68" font-family="monospace" font-size="8" fill="#00ff00" opacity="0.5">on air</text>
+</svg>
